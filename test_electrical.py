@@ -13,6 +13,15 @@ class TestDCAnalyzer(unittest.TestCase):
         self.assertAlmostEqual(result["current_a"], 0.0)
         self.assertAlmostEqual(result["power_w"], 0.0)
 
+    def test_zero_and_negative_resistance(self):
+        # ตรวจสอบ R = 0 ต้องแจ้ง ValueError
+        with self.assertRaises(ValueError):
+            analyze_dc(12, 0)
+
+        # ตรวจสอบ R = -5 ต้องแจ้ง ValueError
+        with self.assertRaises(ValueError):
+            analyze_dc(12, -5)
+
 
 if __name__ == "__main__":
     unittest.main()
